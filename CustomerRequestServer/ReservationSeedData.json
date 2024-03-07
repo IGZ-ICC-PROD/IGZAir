@@ -1,0 +1,18 @@
+﻿[
+  {
+    "ReservationId": "R001",
+    "CustomerName": "John Doe",
+    "FlightNumber": "FL123",
+    "DepartureDate": "2024-03-20T00:00:00",
+    "From": "New York",
+    "To": "London"
+  },
+  {
+    "ReservationId": "R002",
+    "CustomerName": "Jane Smith",
+    "FlightNumber": "FL456",
+    "DepartureDate": "2024-03-22T00:00:00",
+    "From": "Paris",
+    "To": "Tokyo"
+  }
+]
