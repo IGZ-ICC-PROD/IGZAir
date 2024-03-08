@@ -7,8 +7,14 @@
 </head>
 <body>
 <header>
-    <h1>Airline Reservations</h1>
+    <div class="header-content">
+        <div class="logo-container">
+            <img src="img/igz_air.png" alt="IGZ Air Logo" class="logo">
+        </div>
+        <h1>Reservations</h1>
+    </div>
 </header>
+
 <main>
     <section class="reservations">
         <table id="reservationsTable">
@@ -28,7 +34,9 @@
     <section class="chat">
         <div class="chatbox">
             <div id="chatMessages">
-                <div class="message">Welcome to IGZ Air, how may I help you today?</div>
+                <div class="message agent-message">
+                    <span class="agent-name">Skye</span>: Welcome to IGZ Air! My name is Skye and I'm your friendly AI assistant. How may I assist you today?
+                </div>
             </div>
             <div class="chat-input">
                 <input type="text" id="chatInput" placeholder="Type your message...">
@@ -37,6 +45,17 @@
         </div>
     </section>
 </main>
+<div class="dev-console">
+    <div class="console-header" onclick="toggleConsole()">
+        Dev Console
+        <span class="toggle-icon">&#9660;</span>
+    </div>
+    <div class="console-content">
+        <pre id="consoleOutput"></pre>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.6/signalr.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="script.js"></script>
 </body>

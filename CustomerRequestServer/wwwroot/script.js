@@ -28,7 +28,7 @@ async function fetchReservations() {
     }
 }
 
-async function sendMessage() {
+function sendMessage() {
     const chatInput = document.getElementById('chatInput');
     const message = chatInput.value;
     if (message.trim() !== '') {
@@ -39,23 +39,70 @@ async function sendMessage() {
         chatMessages.appendChild(userMessage);
         chatInput.value = '';
 
-        try {
-            const response = await axios.post(`/api/chat/${conversationId}`, { message });
-            const aiResponse = response.data;
-            const aiMessage = document.createElement('div');
-            aiMessage.classList.add('message');
-            aiMessage.textContent = `IGZ Air: ${aiResponse}`;
-            chatMessages.appendChild(aiMessage);
+        // Scroll to the bottom of the chatbox
+        chatMessages.scrollTop = chatMessages.scrollHeight;
 
-            // Scroll to the bottom of the chatbox
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-
-            // Refresh the reservations table after receiving the AI response
-            await fetchReservations();
-        } catch (error) {
-            console.error('Error sending message to AI agent:', error);
-        }
+        // Send the message to the AI agent
+        sendMessageToAgent(message);
     }
 }
+
+async function sendMessageToAgent(message) {
+    try {
+        const response = await axios.post(`/api/chat/${conversationId}`, { message });
+        const aiResponse = response.data;
+        const chatMessages = document.getElementById('chatMessages');
+        const aiMessage = document.createElement('div');
+        aiMessage.classList.add('message', 'agent-message');
+        aiMessage.innerHTML = `<span class="agent-name">Skye</span>: ${aiResponse}`;
+        chatMessages.appendChild(aiMessage);
+
+        // Scroll to the bottom of the chatbox
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+
+        // Refresh the reservations table after receiving the AI response
+        await fetchReservations();
+    } catch (error) {
+        console.error('Error sending message to AI agent:', error);
+    }
+}
+function toggleConsole() {
+    const consoleContent = document.querySelector('.console-content');
+    const toggleIcon = document.querySelector('.toggle-icon');
+
+    if (consoleContent.style.display === 'block') {
+        consoleContent.style.display = 'none';
+        toggleIcon.innerHTML = '&#9660;';
+    } else {
+        consoleContent.style.display = 'block';
+        toggleIcon.innerHTML = '&#9650;';
+    }
+}
+
+function streamConsoleLog(message) {
+    const consoleOutput = document.getElementById('consoleOutput');
+    consoleOutput.textContent += `${message}\n`;
+    consoleOutput.scrollTop = consoleOutput.scrollHeight;
+}
+
+
+// Send message on pressing Enter key
+document.getElementById('chatInput').addEventListener('keyup', function (event) {
+    if (event.key === 'Enter') {
+        sendMessage();
+    }
+});
+
+const connection = new signalR.HubConnectionBuilder()
+    .withUrl("/devConsoleHub")
+    .build();
+
+connection.on("PushEventLog", function (message) {
+    streamConsoleLog(message);
+});
+
+connection.start().catch(function (err) {
+    console.error(err.toString());
+});
 
 fetchReservations();
