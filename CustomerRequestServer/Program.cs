@@ -7,6 +7,7 @@ using Serilog.Core;
 
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Configuration.AddEnvironmentVariables();
 
 Logger logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
