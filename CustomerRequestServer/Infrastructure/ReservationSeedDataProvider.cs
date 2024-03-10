@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using CustomerRequestServer.Domain.Models;
 
-namespace CustomerRequestServer.Domain.Infrastructure;
+namespace CustomerRequestServer.Infrastructure;
 
 public class ReservationSeedDataProvider : IReservationSeedDataProvider
 {

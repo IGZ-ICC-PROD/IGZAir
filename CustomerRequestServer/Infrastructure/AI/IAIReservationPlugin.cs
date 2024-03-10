@@ -1,4 +1,4 @@
-﻿namespace CustomerRequestServer.Domain.Infrastructure.AI;
+﻿namespace CustomerRequestServer.Infrastructure.AI;
 
 public interface IAIReservationPlugin
 {

@@ -1,4 +1,4 @@
-﻿namespace CustomerRequestServer.Domain.Infrastructure;
+﻿namespace CustomerRequestServer.Infrastructure;
 
 public class AirlineDatabaseSettings
 {

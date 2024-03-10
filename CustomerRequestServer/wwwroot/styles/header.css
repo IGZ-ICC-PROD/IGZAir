@@ -1,0 +1,23 @@
+﻿header {
+    padding: 1rem 20px 0.5rem;
+    background-color: #333;
+    color: #fff;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+}
+
+.logo-container {
+    margin-right: 20px;
+}
+
+.logo {
+    max-width: 200px;
+    height: auto;
+}
+
+h1 {
+    font-size: 24px;
+}

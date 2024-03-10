@@ -1,5 +1,5 @@
-﻿using CustomerRequestServer.Domain.Infrastructure.Repositories;
-using CustomerRequestServer.Domain.Models;
+﻿using CustomerRequestServer.Domain.Models;
+using CustomerRequestServer.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CustomerRequestServer.Controllers;

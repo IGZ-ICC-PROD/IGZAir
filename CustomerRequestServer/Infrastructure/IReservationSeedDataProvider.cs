@@ -1,6 +1,6 @@
 ﻿using CustomerRequestServer.Domain.Models;
 
-namespace CustomerRequestServer.Domain.Infrastructure;
+namespace CustomerRequestServer.Infrastructure;
 
 public interface IReservationSeedDataProvider
 {

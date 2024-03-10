@@ -2,8 +2,21 @@
 <html>
 <head>
     <title>Airline Reservations</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/chat.css">
+    <link rel="stylesheet" href="styles/console.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" >
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.6/signalr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/chat.js"></script>
+    <script src="scripts/console.js"></script>
 </head>
 <body>
 <header>
@@ -33,11 +46,27 @@
     </section>
     <section class="chat">
         <div class="chatbox">
+            <div class="chat-header">
+                <div class="chat-title">Chat with Support</div>
+            <div class="agent-toggle">
+                <i class="support-icon fa-solid fa-plane-departure"></i>
+                <input type="checkbox" id="agentToggle">
+                <label for="agentToggle"></label>
+                <i class="technical-icon fa-solid fa-code"></i>
+            </div>
+            </div>
+
+
             <div id="chatMessages">
                 <div class="message agent-message">
                     <span class="agent-name">Skye</span>: Welcome to IGZ Air! My name is Skye and I'm your friendly AI assistant. How may I assist you today?
                 </div>
             </div>
+            <div id="typingIndicator" class="typing-indicator">
+                <span class="typing-dots"></span>
+                <span class="typing-text">Skye is typing...</span>
+            </div>
+
             <div class="chat-input">
                 <input type="text" id="chatInput" placeholder="Type your message...">
                 <button onclick="sendMessage()">Send</button>
@@ -45,18 +74,21 @@
         </div>
     </section>
 </main>
+
 <div class="dev-console">
     <div class="console-header" onclick="toggleConsole()">
         Dev Console
         <span class="toggle-icon">&#9660;</span>
     </div>
-    <div class="console-content">
-        <pre id="consoleOutput"></pre>
+    <div class="console-container">
+        <div class="console-content">
+            <pre id="consoleOutput"></pre>
+        </div>
+        <div class="console-input">
+            <input type="text" id="consoleInput" placeholder="Enter command...">
+            <button onclick="sendConsoleCommand()">Send</button>
+        </div>
     </div>
 </div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.6/signalr.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="script.js"></script>
 </body>
 </html>

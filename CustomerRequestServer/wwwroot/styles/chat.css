@@ -1,0 +1,147 @@
+﻿.chatbox {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.chat-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.agent-toggle {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.agent-toggle input[type="checkbox"] {
+    display: none;
+}
+
+.agent-toggle label {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    background-color: #007bff;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 5px;
+}
+
+.agent-toggle label:before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 26px;
+    height: 26px;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.agent-toggle input[type="checkbox"]:checked + label {
+    background-color: #ff7f00;
+}
+
+.agent-toggle input[type="checkbox"]:checked + label:before {
+    transform: translateX(30px);
+}
+
+#chatMessages {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.message {
+    margin-bottom: 10px;
+}
+
+.agent-message {
+    background-color: #f0f8ff;
+    color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    align-self: flex-start;
+}
+
+
+.agent-message.technical {
+    background-color: #28a745;
+}
+
+.agent-name {
+    font-weight: bold;
+    color: #1e90ff;
+}
+
+.user-message {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: right;
+}
+
+.user-name {
+    font-weight: bold;
+    color: #333;
+}
+
+.chat-input {
+    display: flex;
+}
+
+#chatInput {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.typing-indicator {
+    display: none;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.typing-dots {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #333;
+    margin-right: 5px;
+    animation: typing 1.2s infinite;
+}
+
+.typing-text {
+    font-size: 14px;
+    color: #666;
+}
+
+@keyframes typing {
+    0%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-6px);
+    }
+}

@@ -3,7 +3,7 @@ using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace CustomerRequestServer.Domain.Infrastructure.Repositories;
+namespace CustomerRequestServer.Infrastructure.Repositories;
 
 public class ReservationRepository : IReservationRepository
 {
@@ -37,16 +37,15 @@ public class ReservationRepository : IReservationRepository
        return await result.ToListAsync();
     }
     
-    public async Task ExecuteMongoQueryAsync(string mongoQuery)
+    public async Task<BsonDocument> ExecuteMongoQueryAsync(string mongoQuery)
     {
         try
         {
             var updateCommand= BsonDocument.Parse(mongoQuery);
             
-            _logger.LogInformation("executing update command after merge: " + updateCommand);
-            var result = await _reservationCollection.Database.RunCommandAsync<BsonDocument>(updateCommand);
-            
+            BsonDocument? result = await _reservationCollection.Database.RunCommandAsync<BsonDocument>(updateCommand);
             _logger.LogInformation("The result of the MongoDB query is: " + result);
+            return result;
         }
         catch (Exception e)
         {

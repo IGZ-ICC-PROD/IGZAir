@@ -1,13 +1,9 @@
-using CustomerRequestServer.Domain.Infrastructure;
-using CustomerRequestServer.Domain.Infrastructure.AI;
-using CustomerRequestServer.Domain.Infrastructure.Repositories;
 using CustomerRequestServer.Hubs;
-using Microsoft.AspNetCore.SignalR;
+using CustomerRequestServer.Infrastructure;
+using CustomerRequestServer.Infrastructure.AI;
+using CustomerRequestServer.Infrastructure.Repositories;
 using Microsoft.SemanticKernel;
 using Serilog;
-using Serilog.Sinks.SignalR.Core.Extensions;
-using Serilog.Sinks.SignalR.Core.Interfaces;
-
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddEnvironmentVariables();
@@ -27,17 +23,14 @@ builder.Services.AddSingleton<IKernelBuilder>(serviceProvider =>
 });
 
 builder.Services.AddControllers();
+builder.Services.AddSerilog((provider, configuration) =>
+{
+    configuration.ReadFrom.Configuration(builder.Configuration)
+        .Enrich.FromLogContext()
+        .WriteTo.Console();
+});
 
 var app = builder.Build();
-
-IHubContext<DevConsoleHub, ISerilogHub> hubContext = app.Services.GetRequiredService<IHubContext<DevConsoleHub, ISerilogHub>>();
-
-Log.Logger = new LoggerConfiguration()
-    .ReadFrom.Configuration(builder.Configuration)
-    .Enrich.FromLogContext()
-    .WriteTo.Console()
-    .WriteTo.SignalR(hubContext)
-    .CreateLogger();
 
 if (!app.Environment.IsDevelopment())
 {

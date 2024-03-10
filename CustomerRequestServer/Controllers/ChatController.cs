@@ -1,8 +1,9 @@
 ﻿using System.Collections.Concurrent;
-using CustomerRequestServer.Domain.Infrastructure.AI;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.SemanticKernel;
 using CustomerRequestServer.Domain.Models;
+using CustomerRequestServer.Hubs;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
 
@@ -13,6 +14,8 @@ namespace CustomerRequestServer.Controllers;
 public class ChatController : ControllerBase
 {
     private readonly Kernel _kernel;
+    private readonly IHubContext<DevConsoleHub> _hubContext;
+    
     private static readonly ConcurrentDictionary<string, ChatHistory> ChatHistories = new ConcurrentDictionary<string, ChatHistory>();
 
 
@@ -33,8 +36,9 @@ IMPORTANT: In the Reservation model, the 'ReservationId' property is mapped to t
 Finally, always respond to the user with a confirmation message indicating the success or failure of the operation. Remember, this is a customer-facing application, so prioritize clarity, friendliness, and avoiding technical jargon in your responses"";";
 
     
-    public ChatController(IKernelBuilder semanticKernelBuilder)
+    public ChatController(IKernelBuilder semanticKernelBuilder, IHubContext<DevConsoleHub> hubContext)
     {
+        _hubContext = hubContext;
         _kernel = semanticKernelBuilder.Build();
     }
 

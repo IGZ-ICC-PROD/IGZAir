@@ -1,0 +1,110 @@
+﻿.dev-console {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #f0f0f0;
+    border-top: 1px solid #ccc;
+    font-family: monospace;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+}
+
+.console-header {
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.toggle-icon {
+    font-size: 12px;
+}
+
+.console-container {
+    display: none;
+    max-height: 0;
+    overflow-y: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.console-container.open {
+    max-height: 50vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.console-content {
+    overflow-y: auto;
+    flex: 1;
+}
+
+.console-content pre {
+    margin: 0;
+    padding: 10px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 14px;
+}
+
+.console-input {
+    display: flex;
+    padding: 10px;
+}
+
+.console-input input {
+    flex: 1;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.console-input button {
+    padding: 5px 10px;
+    margin-left: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.console-message {
+    margin-bottom: 10px;
+}
+
+.console-message code {
+    display: block;
+    padding: 20px;
+    background-color: #f0f8ff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: monospace;
+    font-size: 14px;
+    color: #333;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.console-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.console-content::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
+}
+
+.console-content::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+}
+
+.console-content::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
