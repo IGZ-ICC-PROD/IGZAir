@@ -1,5 +1,30 @@
 ﻿let currentAgent = 'customerSupport';
-let conversationId = Math.random();
+let conversationIds = {
+    customerSupport: uuidv4(),
+    technicalSupport: uuidv4(),
+    current: function() {
+        return this[currentAgent];
+    }
+}
+
+async function loadChatHistory() {
+    try {
+        const response = await axios.get(`/api/chat/${conversationIds.current()}?agentType=${currentAgent}`);
+        const chatHistory = response.data;
+        const chatMessages = document.getElementById('chatMessages');
+        chatMessages.innerHTML = '';
+        chatHistory.forEach(message => {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', message.author === 'user' ? 'user-message' : currentAgent === 'customerSupport' ? 'agent-message' : 'agent-message-technical');
+            const senderName = message.author === 'user' ? 'You' : currentAgent === 'customerSupport' ? 'Skye' : 'JetCode';
+            messageElement.innerHTML = `<span class="${message.sender === 'user' ? 'user' : 'agent'}-name">${senderName}</span>: ${message.message}`;
+            chatMessages.appendChild(messageElement);
+        });
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    } catch (error) {
+        console.error('Error loading chat history:', error);
+    }
+}
 
 
 async function sendMessage() {
@@ -32,12 +57,12 @@ async function sendMessageToAgent(message) {
         const typingIndicator = document.getElementById('typingIndicator');
         typingIndicator.style.display = 'flex';
 
-        const response = await axios.post(`/api/chat/${conversationId}`, { message });
+        const response = await axios.post(`/api/chat/${conversationIds.current()}`, { message: message, agentType: currentAgent });
         const aiResponse = response.data;
         const chatMessages = document.getElementById('chatMessages');
         const aiMessage = document.createElement('div');
-        aiMessage.classList.add('message', 'agent-message');
-        aiMessage.innerHTML = `<span class="agent-name">Skye</span>: ${aiResponse}`;
+        aiMessage.classList.add('message', currentAgent === 'customerSupport' ? 'agent-message' : 'agent-message-technical');
+        aiMessage.innerHTML = `<span class="${currentAgent === 'customerSupport' ? 'agent' : 'agent-technical'}-name">${currentAgent === 'customerSupport' ? 'Skye' : 'JetCode'}</span>: ${aiResponse}`;
         chatMessages.appendChild(aiMessage);
 
         // Scroll to the bottom of the chatbox
@@ -54,34 +79,31 @@ async function sendMessageToAgent(message) {
     }
 }
 
-function toggleAgent(agent) {
+async function toggleAgent(agent) {
     currentAgent = agent;
-    const customerSupportBtn = document.getElementById('customerSupportBtn');
-    const technicalSupportBtn = document.getElementById('technicalSupportBtn');
-
-    if (currentAgent === 'customerSupport') {
-        customerSupportBtn.classList.add('active');
-        technicalSupportBtn.classList.remove('active');
-    } else if (currentAgent === 'technicalSupport') {
-        customerSupportBtn.classList.remove('active');
-        technicalSupportBtn.classList.add('active');
-    }
+    await loadChatHistory();
 }
 
-function initializeChat() {
+function uuidv4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
+        .replace(/[xy]/g, function (c) {
+            const r = Math.random() * 16 | 0,
+                v = c === 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+}
+
+async function initializeChat() {
     const chatInput = document.getElementById('chatInput');
     chatInput.addEventListener('keyup', onChatKeyUp);
 
-    const customerSupportBtn = document.getElementById('customerSupportBtn');
-    const technicalSupportBtn = document.getElementById('technicalSupportBtn');
-
-    customerSupportBtn.addEventListener('click', function() {
-        toggleAgent('customerSupport');
+    const agentToggle = document.getElementById('agentToggle');
+    
+    agentToggle.addEventListener('change', function() {
+        toggleAgent(currentAgent === 'customerSupport' ? 'technicalSupport' : 'customerSupport');
     });
-
-    technicalSupportBtn.addEventListener('click', function() {
-        toggleAgent('technicalSupport');
-    });
+    
+    await loadChatHistory();
 }
 
 document.addEventListener('DOMContentLoaded', initializeChat);

@@ -27,7 +27,7 @@ public class AIReservationPlugin : IAIReservationPlugin
     {
         try
         {
-            _logger.Log(LogLevel.Information, "Skye called her AI Plugin, executing MongoDB query: " + mongoQuery);
+            _logger.Log(LogLevel.Information, "Skye called her AI Plugin, executing MongoDB query: {Query}",mongoQuery);
             await _hubContext.Clients.All.PushConsoleMessage("Skye called her AI Plugin, executing MongoDB query: " + mongoQuery);
             await _reservationRepository.ExecuteMongoQueryAsync(mongoQuery);
         }

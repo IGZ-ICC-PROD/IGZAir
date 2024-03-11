@@ -11,6 +11,8 @@ builder.Services.Configure<AirlineDatabaseSettings>(builder.Configuration.GetSec
 builder.Services.AddSingleton<IReservationSeedDataProvider, ReservationSeedDataProvider>();
 builder.Services.AddSingleton<IReservationRepository, ReservationRepository>();
 builder.Services.AddSingleton<IAIReservationPlugin, AIReservationPlugin>();
+builder.Services.AddSingleton<IChatHistoryRepository, ChatHistoryRepository>();
+builder.Services.AddSingleton<IAgentProvider, AgentProvider>();
 builder.Services.AddSignalR();
 builder.Services.AddSingleton<IKernelBuilder>(serviceProvider =>
 {

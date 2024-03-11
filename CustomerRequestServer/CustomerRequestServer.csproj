@@ -11,6 +11,24 @@
       <Content Include="..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
+      <None Remove="Infrastructure\AI\CustomerAgent.txt" />
+      <None Remove="Infrastructure\AI\TechnicalAgent.txt" />
+      <None Remove="Infrastructure\AI\AgentGreetings\TechnicalAgent.txt" />
+      <Content Include="Infrastructure\AI\AgentGreetings\TechnicalAgent.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Infrastructure\AI\AgentGreetings\CustomerAgent.txt" />
+      <Content Include="Infrastructure\AI\AgentGreetings\CustomerAgent.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Infrastructure\AI\AgentSystemMessages\CustomerAgent.txt" />
+      <Content Include="Infrastructure\AI\AgentSystemMessages\CustomerAgent.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Infrastructure\AI\AgentSystemMessages\TechnicalAgent.txt" />
+      <Content Include="Infrastructure\AI\AgentSystemMessages\TechnicalAgent.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
     <ItemGroup>
