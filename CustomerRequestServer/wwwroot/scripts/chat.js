@@ -15,14 +15,30 @@ async function loadChatHistory() {
         chatMessages.innerHTML = '';
         chatHistory.forEach(message => {
             const messageElement = document.createElement('div');
-            messageElement.classList.add('message', message.author === 'user' ? 'user-message' : currentAgent === 'customerSupport' ? 'agent-message' : 'agent-message-technical');
+            messageElement.classList.add('message', message.author === 'user' ? 'user-message' : 'agent-message');
+            if(message.author !== 'user' && currentAgent === 'technicalSupport') {
+                messageElement.classList.add('technical');
+            }
             const senderName = message.author === 'user' ? 'You' : currentAgent === 'customerSupport' ? 'Skye' : 'JetCode';
-            messageElement.innerHTML = `<span class="${message.sender === 'user' ? 'user' : 'agent'}-name">${senderName}</span>: ${message.message}`;
+            messageElement.innerHTML = createMessage(message.author, message.message);
+            //messageElement.innerHTML = `<span class="${message.author === 'user' ? 'user-name' : 'agent-name' + currentAgent === 'technicalSupport' ? ' technical' : ''}">${senderName}</span>: ${message.message}`;
             chatMessages.appendChild(messageElement);
         });
         chatMessages.scrollTop = chatMessages.scrollHeight;
     } catch (error) {
         console.error('Error loading chat history:', error);
+    }
+}
+
+function createMessage(author, message) {
+    if(author === 'user') {
+        return `<span class="user-name">You</span>: ${message}`;
+    }
+    else if(currentAgent === 'customerSupport') {
+        return `<span class="agent-name">Skye</span>: ${message}`;
+    }
+    else {
+        return `<span class="agent-name technical">JetCode</span>: ${message}`;
     }
 }
 
@@ -55,14 +71,19 @@ async function onChatKeyUp(event) {
 async function sendMessageToAgent(message) {
     try {
         const typingIndicator = document.getElementById('typingIndicator');
+        const typingIndicatorText = document.getElementById('typingIndicatorText');
+        typingIndicatorText.innerText = `${currentAgent === 'customerSupport' ? 'Skye' : 'JetCode'} is typing...`;
         typingIndicator.style.display = 'flex';
 
         const response = await axios.post(`/api/chat/${conversationIds.current()}`, { message: message, agentType: currentAgent });
         const aiResponse = response.data;
         const chatMessages = document.getElementById('chatMessages');
         const aiMessage = document.createElement('div');
-        aiMessage.classList.add('message', currentAgent === 'customerSupport' ? 'agent-message' : 'agent-message-technical');
-        aiMessage.innerHTML = `<span class="${currentAgent === 'customerSupport' ? 'agent' : 'agent-technical'}-name">${currentAgent === 'customerSupport' ? 'Skye' : 'JetCode'}</span>: ${aiResponse}`;
+        aiMessage.classList.add('message','agent-message');
+        if(currentAgent === 'technicalSupport') {
+            aiMessage.classList.add('technical');
+        }
+        aiMessage.innerHTML = `<span class="agent-name${currentAgent === 'technicalSupport' ? ' technical' : ''}">${currentAgent === 'customerSupport' ? 'Skye' : 'JetCode'}</span>: ${aiResponse}`;
         chatMessages.appendChild(aiMessage);
 
         // Scroll to the bottom of the chatbox

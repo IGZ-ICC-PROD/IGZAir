@@ -1,0 +1,67 @@
+[
+  {
+    "FlightNumber": "FL123",
+    "DepartureTime": "2024-03-20T09:00:00",
+    "ArrivalTime": "2024-03-20T12:30:00",
+    "Origin": "JFK",
+    "Destination": "LHR",
+    "Aircraft": "Boeing 747",
+    "SeatsAvailable": {
+      "Economy": 100,
+      "Business": 20,
+      "First": 10
+    }
+  },
+  {
+    "FlightNumber": "FL456",
+    "DepartureTime": "2024-03-22T14:30:00",
+    "ArrivalTime": "2024-03-23T07:45:00",
+    "Origin": "CDG",
+    "Destination": "HND",
+    "Aircraft": "Airbus A380",
+    "SeatsAvailable": {
+      "Economy": 200,
+      "Business": 50,
+      "First": 15
+    }
+  },
+  {
+    "FlightNumber": "FL789",
+    "DepartureTime": "2024-03-25T18:15:00",
+    "ArrivalTime": "2024-03-26T00:30:00",
+    "Origin": "SYD",
+    "Destination": "LAX",
+    "Aircraft": "Boeing 787 Dreamliner",
+    "SeatsAvailable": {
+      "Economy": 150,
+      "Business": 30,
+      "First": 12
+    }
+  },
+  {
+    "FlightNumber": "FL321",
+    "DepartureTime": "2024-04-01T11:45:00",
+    "ArrivalTime": "2024-04-01T16:20:00",
+    "Origin": "DXB",
+    "Destination": "SIN",
+    "Aircraft": "Airbus A350",
+    "SeatsAvailable": {
+      "Economy": 180,
+      "Business": 40,
+      "First": 8
+    }
+  },
+  {
+    "FlightNumber": "FL654",
+    "DepartureTime": "2024-04-05T07:30:00",
+    "ArrivalTime": "2024-04-05T10:10:00",
+    "Origin": "YYZ",
+    "Destination": "MEX",
+    "Aircraft": "Boeing 737",
+    "SeatsAvailable": {
+      "Economy": 120,
+      "Business": 25,
+      "First": 6
+    }
+  }
+]

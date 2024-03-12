@@ -103,14 +103,18 @@
 }
 
 .agent-message.technical {
-    background-color: #d4edda;
-    border: 1px solid #c3e6cb;
+    background-color: #ff7f0042;
+    border: 1px solid rgba(255, 127, 0, 0.55);
 }
 
 .agent-name {
     font-weight: bold;
     color: #1e90ff;
     margin-bottom: 4px;
+}
+
+.agent-name.technical {
+    color: #ff5100;
 }
 
 .user-message {
@@ -159,6 +163,7 @@
     display: none;
     align-items: center;
     margin-bottom: 16px;
+    padding-left: 24px;
 }
 
 .typing-dots {
