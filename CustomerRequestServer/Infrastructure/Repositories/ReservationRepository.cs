@@ -1,6 +1,9 @@
-﻿using CustomerRequestServer.Domain.Models;
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
+using CustomerRequestServer.Domain.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
+using MongoDB.Bson.IO;
 using MongoDB.Driver;
 
 namespace CustomerRequestServer.Infrastructure.Repositories;
@@ -27,6 +30,8 @@ public class ReservationRepository : IReservationRepository
         if (_reservationCollection.EstimatedDocumentCount() == 0)
         {
             var testReservations = _seedDataProvider.GetSeedData();
+            _logger.LogInformation("Seeding the database with test data. {Data}", JsonSerializer.Serialize(testReservations) );
+
             _reservationCollection.InsertMany(testReservations);
         }
     }

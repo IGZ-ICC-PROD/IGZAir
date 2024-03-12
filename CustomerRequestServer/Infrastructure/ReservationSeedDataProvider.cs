@@ -8,12 +8,18 @@ public class ReservationSeedDataProvider : IReservationSeedDataProvider
     public async Task<List<Reservation>?> GetSeedDataAsync()
     {
         var fileStream = File.OpenRead("ReservationSeedData.json");
-        return await JsonSerializer.DeserializeAsync<List<Reservation>>(fileStream);
+        return await JsonSerializer.DeserializeAsync<List<Reservation>>(fileStream, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        });
     }
 
     public List<Reservation>? GetSeedData()
     {
         var fileStream = File.OpenRead("ReservationSeedData.json");
-        return JsonSerializer.Deserialize<List<Reservation>>(fileStream);
+        return JsonSerializer.Deserialize<List<Reservation>>(fileStream, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        });
     }
 }

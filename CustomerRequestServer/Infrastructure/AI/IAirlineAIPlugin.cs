@@ -1,6 +1,6 @@
 ﻿namespace CustomerRequestServer.Infrastructure.AI;
 
-public interface IAIReservationPlugin
+public interface IAirlineAIPlugin
 {
     Task<string> GetReservationsAsync();
     Task<string> ExecuteModificationOnMongoDbAsync(string mongoQuery);

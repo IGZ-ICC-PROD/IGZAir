@@ -5,14 +5,14 @@ function displayReservations(reservations) {
 
     reservations.forEach(reservation => {
         const row = document.createElement('tr');
-        const formattedDate = formatDate(reservation.departureDate);
         row.innerHTML = `
             <td>${reservation.reservationId}</td>
-            <td>${reservation.customerName}</td>
+            <td>${reservation.customer.firstName} ${reservation.customer.lastName}</td>
             <td>${reservation.flightNumber}</td>
-            <td>${formattedDate}</td>
-            <td>${reservation.from}</td>
-            <td>${reservation.to}</td>
+            <td>${formatDate(reservation.departureDate)}</td>
+            <td>${reservation.seatClass}</td>
+            <td>${reservation.seatNumber}</td>
+            <td>${reservation.status}</td>
         `;
         tableBody.appendChild(row);
     });

@@ -5,4 +5,6 @@ public class AirlineDatabaseSettings
     public string ConnectionString { get; set; } = null!;
     public string DatabaseName { get; set; } = null!;
     public string ReservationCollectionName { get; set; } = null!;
+    
+    public string FlightCollectionName { get; set; } = null!;
 }

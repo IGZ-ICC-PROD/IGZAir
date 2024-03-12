@@ -1,0 +1,58 @@
+[
+  {
+    "flightNumber": "FL123",
+    "departureAirport": {
+      "code": "JFK",
+      "name": "John F. Kennedy International Airport",
+      "city": "New York"
+    },
+    "arrivalAirport": {
+      "code": "LHR",
+      "name": "London Heathrow Airport",
+      "city": "London"
+    },
+    "departureTime": "2024-03-20T09:00:00",
+    "arrivalTime": "2024-03-20T12:30:00",
+    "aircraft": {
+      "model": "Boeing 747",
+      "capacity": {
+        "economy": 100,
+        "business": 20,
+        "first": 10
+      }
+    },
+    "seatsAvailable": {
+      "economy": 80,
+      "business": 15,
+      "first": 8
+    }
+  },
+  {
+    "flightNumber": "FL456",
+    "departureAirport": {
+      "code": "CDG",
+      "name": "Charles de Gaulle Airport",
+      "city": "Paris"
+    },
+    "arrivalAirport": {
+      "code": "HND",
+      "name": "Tokyo Haneda Airport",
+      "city": "Tokyo"
+    },
+    "departureTime": "2024-03-22T14:30:00",
+    "arrivalTime": "2024-03-23T07:45:00",
+    "aircraft": {
+      "model": "Airbus A380",
+      "capacity": {
+        "economy": 200,
+        "business": 50,
+        "first": 15
+      }
+    },
+    "seatsAvailable": {
+      "economy": 180,
+      "business": 45,
+      "first": 12
+    }
+  }
+]
