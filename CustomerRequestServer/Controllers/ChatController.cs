@@ -38,7 +38,6 @@ public class ChatController : ControllerBase
         };
 
         IReadOnlyList<ChatMessageContent> response = await chatCompletionService.GetChatMessageContentsAsync(history, openAIPromptExecutionSettings, _kernel);
-        
         _chatHistoryRepository.UpdateChatHistory(conversationId,AuthorRole.Assistant, response.Last().Content);
 
         return Ok(response.Last().Content);
@@ -48,7 +47,7 @@ public class ChatController : ControllerBase
     public async Task<ActionResult<IEnumerable<ChatMessage>>> GetChatHistory(Guid conversationId,[FromQuery]AgentType agentType)
     {
         ChatHistory history = await _chatHistoryRepository.GetOrCreateChatHistoryAsync(conversationId,agentType);
-        IEnumerable<ChatMessage> chatMessages = history.Where(entry => entry.Role == AuthorRole.Assistant || entry.Role == AuthorRole.User).Select((content => new ChatMessage(content.Role.Label,content.Content)));
+        IEnumerable<ChatMessage> chatMessages = history.Where(entry => (entry.Role == AuthorRole.Assistant || entry.Role == AuthorRole.User) && entry.Content != null).Select((content => new ChatMessage(content.Role.Label,content.Content)));
 
         return Ok(chatMessages);
     }
