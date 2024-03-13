@@ -16,12 +16,11 @@ async function loadChatHistory() {
         chatHistory.forEach(message => {
             const messageElement = document.createElement('div');
             messageElement.classList.add('message', message.author === 'user' ? 'user-message' : 'agent-message');
-            if(message.author !== 'user' && currentAgent === 'technicalSupport') {
+            if (message.author !== 'user' && currentAgent === 'technicalSupport') {
                 messageElement.classList.add('technical');
             }
             const senderName = message.author === 'user' ? 'You' : currentAgent === 'customerSupport' ? 'Skye' : 'JetCode';
-            messageElement.innerHTML = createMessage(message.author, message.message);
-            //messageElement.innerHTML = `<span class="${message.author === 'user' ? 'user-name' : 'agent-name' + currentAgent === 'technicalSupport' ? ' technical' : ''}">${senderName}</span>: ${message.message}`;
+            messageElement.innerHTML = renderMessage(message.author, message.message);
             chatMessages.appendChild(messageElement);
         });
         chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -30,16 +29,31 @@ async function loadChatHistory() {
     }
 }
 
-function createMessage(author, message) {
-    if(author === 'user') {
-        return `<span class="user-name">You</span>: ${message}`;
+function renderMessage(author, message) {
+    let converter = new showdown.Converter();
+    let formattedMessage = converter.makeHtml(message);
+
+    let messageContent = '';
+    if (author === 'user') {
+        messageContent = `<span class="user-name">You</span>: ${formattedMessage}`;
+    } else if (currentAgent === 'customerSupport') {
+        messageContent = `<span class="agent-name">Skye</span>: ${formattedMessage}`;
+    } else {
+        messageContent = `<span class="agent-name technical">JetCode</span>: ${formattedMessage}`;
     }
-    else if(currentAgent === 'customerSupport') {
-        return `<span class="agent-name">Skye</span>: ${message}`;
-    }
-    else {
-        return `<span class="agent-name technical">JetCode</span>: ${message}`;
-    }
+
+    // Create a temporary container to hold the message content
+    const tempContainer = document.createElement('div');
+    tempContainer.innerHTML = messageContent;
+
+    // Apply syntax highlighting to the code blocks in the message
+    const codeBlocks = tempContainer.querySelectorAll('code');
+    codeBlocks.forEach((block) => {
+        hljs.highlightBlock(block);
+    });
+
+    // Return the formatted message content with syntax highlighting applied
+    return tempContainer.innerHTML;
 }
 
 
@@ -50,7 +64,7 @@ async function sendMessage() {
         const chatMessages = document.getElementById('chatMessages');
         const userMessage = document.createElement('div');
         userMessage.classList.add('message', 'user-message');
-        userMessage.innerHTML = `<span class="user-name">You</span>: ${message}`;
+        userMessage.innerHTML = renderMessage('user', message);
         chatMessages.appendChild(userMessage);
         chatInput.value = '';
 
@@ -64,7 +78,7 @@ async function sendMessage() {
 
 async function onChatKeyUp(event) {
     if (event.key === 'Enter') {
-       await sendMessage();
+        await sendMessage();
     }
 }
 
@@ -79,13 +93,13 @@ async function sendMessageToAgent(message) {
         const aiResponse = response.data;
         const chatMessages = document.getElementById('chatMessages');
         const aiMessage = document.createElement('div');
-        aiMessage.classList.add('message','agent-message');
-        if(currentAgent === 'technicalSupport') {
+        aiMessage.classList.add('message', 'agent-message');
+        if (currentAgent === 'technicalSupport') {
             aiMessage.classList.add('technical');
         }
-        aiMessage.innerHTML = `<span class="agent-name${currentAgent === 'technicalSupport' ? ' technical' : ''}">${currentAgent === 'customerSupport' ? 'Skye' : 'JetCode'}</span>: ${aiResponse}`;
+        aiMessage.innerHTML = renderMessage(currentAgent === 'customerSupport' ? 'Skye' : 'JetCode', aiResponse);
         chatMessages.appendChild(aiMessage);
-
+        
         // Scroll to the bottom of the chatbox
         chatMessages.scrollTop = chatMessages.scrollHeight;
 
@@ -119,11 +133,11 @@ async function initializeChat() {
     chatInput.addEventListener('keyup', onChatKeyUp);
 
     const agentToggle = document.getElementById('agentToggle');
-    
+
     agentToggle.addEventListener('change', function() {
         toggleAgent(currentAgent === 'customerSupport' ? 'technicalSupport' : 'customerSupport');
     });
-    
+
     await loadChatHistory();
 }
 
