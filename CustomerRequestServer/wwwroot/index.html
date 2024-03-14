@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>Airline Reservations</title>
+    <title>Flugbuchungen</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✈️</text></svg>">
     <link rel="stylesheet" href="styles/base.css">
     <link rel="stylesheet" href="styles/header.css">
@@ -25,7 +25,7 @@
         <div class="logo-container">
             <img src="img/igz_air.png" alt="IGZ Air Logo" class="logo">
         </div>
-        <h1>Reservations</h1>
+        <h1>Buchungen</h1>
     </div>
 </header>
 
@@ -34,12 +34,12 @@
         <table id="reservationsTable">
             <thead>
             <tr>
-                <th>Reservation ID</th>
-                <th>Customer Name</th>
-                <th>Flight Number</th>
-                <th>Departure Date</th>
-                <th>Seat Class</th>
-                <th>Seat Number</th>
+                <th>Buchungsnummer</th>
+                <th>Kundenname</th>
+                <th>Flugnummer</th>
+                <th>Abflugdatum</th>
+                <th>Sitzklasse</th>
+                <th>Sitzplatz</th>
                 <th>Status</th>
             </tr>
             </thead>
@@ -49,7 +49,7 @@
     <section class="chat">
         <div class="chatbox">
             <div class="chat-header">
-                <div class="chat-title">Chat with Support</div>
+                <div class="chat-title">Chat mit dem Support</div>
                 <div class="agent-toggle">
                     <i class="support-icon fa-solid fa-plane-departure"></i>
                     <input type="checkbox" id="agentToggle">
@@ -67,9 +67,10 @@
             </div>
 
             <div class="chat-input">
-                <input type="text" id="chatInput" placeholder="Type your message...">
-                <button onclick="sendMessage()">Send</button>
+                <input type="text" id="chatInput" placeholder="Nachricht eingeben...">
+                <button onclick="sendMessage()">Senden</button>
             </div>
+
         </div>
     </section>
 </main>
@@ -84,8 +85,8 @@
             <pre id="consoleOutput"></pre>
         </div>
         <div class="console-input">
-            <input type="text" id="consoleInput" placeholder="Enter command...">
-            <button onclick="sendConsoleCommand()">Send</button>
+            <input type="text" id="consoleInput" placeholder="Befehl eingeben...">
+            <button onclick="sendConsoleCommand()">Senden</button>
         </div>
     </div>
 </div>

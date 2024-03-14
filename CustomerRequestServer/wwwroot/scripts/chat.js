@@ -19,7 +19,7 @@ async function loadChatHistory() {
             if (message.author !== 'user' && currentAgent === 'technicalSupport') {
                 messageElement.classList.add('technical');
             }
-            const senderName = message.author === 'user' ? 'You' : currentAgent === 'customerSupport' ? 'Skye' : 'JetCode';
+            const senderName = message.author === 'user' ? 'Sie' : currentAgent === 'customerSupport' ? 'Skye' : 'JetCode';
             messageElement.innerHTML = renderMessage(message.author, message.message);
             chatMessages.appendChild(messageElement);
         });
@@ -35,7 +35,7 @@ function renderMessage(author, message) {
 
     let messageContent = '';
     if (author === 'user') {
-        messageContent = `<span class="user-name">You</span>: ${formattedMessage}`;
+        messageContent = `<span class="user-name">´Sie</span>: ${formattedMessage}`;
     } else if (currentAgent === 'customerSupport') {
         messageContent = `<span class="agent-name">Skye</span>: ${formattedMessage}`;
     } else {
@@ -86,7 +86,7 @@ async function sendMessageToAgent(message) {
     try {
         const typingIndicator = document.getElementById('typingIndicator');
         const typingIndicatorText = document.getElementById('typingIndicatorText');
-        typingIndicatorText.innerText = `${currentAgent === 'customerSupport' ? 'Skye' : 'JetCode'} is typing...`;
+        typingIndicatorText.innerText = `${currentAgent === 'customerSupport' ? 'Skye' : 'JetCode'} antwortet...`;
         typingIndicator.style.display = 'flex';
 
         const response = await axios.post(`/api/chat/${conversationIds.current()}`, { message: message, agentType: currentAgent });
