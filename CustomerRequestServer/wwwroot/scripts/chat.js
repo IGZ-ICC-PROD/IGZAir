@@ -35,7 +35,7 @@ function renderMessage(author, message) {
 
     let messageContent = '';
     if (author === 'user') {
-        messageContent = `<span class="user-name">´Sie</span>: ${formattedMessage}`;
+        messageContent = `<span class="user-name">Sie</span>: ${formattedMessage}`;
     } else if (currentAgent === 'customerSupport') {
         messageContent = `<span class="agent-name">Skye</span>: ${formattedMessage}`;
     } else {

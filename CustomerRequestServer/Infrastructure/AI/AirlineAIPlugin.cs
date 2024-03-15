@@ -5,6 +5,7 @@ using CustomerRequestServer.Hubs;
 using CustomerRequestServer.Infrastructure.Repositories;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.SemanticKernel;
+using MongoDB.Bson;
 
 namespace CustomerRequestServer.Infrastructure.AI;
 
@@ -31,14 +32,13 @@ public class AirlineAIPlugin : IAirlineAIPlugin
         {
             _logger.Log(LogLevel.Information, "Skye called her AI Plugin, executing MongoDB query: {Query}", mongoQuery);
             await _hubContext.Clients.All.PushConsoleMessage("Skye called her AI Plugin, executing MongoDB query: " + mongoQuery);
-            await _reservationRepository.ExecuteMongoQueryAsync(mongoQuery);
+           BsonDocument result = await _reservationRepository.ExecuteMongoQueryAsync(mongoQuery);
+           return result.ToJson();
         }
         catch (Exception e)
         {
             return e.Message;
         }
-
-        return "Operation executed successfully.";
     }
 
     [KernelFunction]

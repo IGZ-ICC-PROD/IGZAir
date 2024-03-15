@@ -54,5 +54,89 @@
       "business": 45,
       "first": 12
     }
+  },
+  {
+    "flightNumber": "FL789",
+    "departureAirport": {
+      "code": "LAX",
+      "name": "Los Angeles International Airport",
+      "city": "Los Angeles"
+    },
+    "arrivalAirport": {
+      "code": "SYD",
+      "name": "Sydney Kingsford Smith Airport",
+      "city": "Sydney"
+    },
+    "departureTime": "2024-03-25T22:00:00",
+    "arrivalTime": "2024-03-27T08:30:00",
+    "aircraft": {
+      "model": "Boeing 787 Dreamliner",
+      "capacity": {
+        "economy": 150,
+        "business": 30,
+        "first": 8
+      }
+    },
+    "seatsAvailable": {
+      "economy": 140,
+      "business": 28,
+      "first": 7
+    }
+  },
+  {
+    "flightNumber": "FL321",
+    "departureAirport": {
+      "code": "SFO",
+      "name": "San Francisco International Airport",
+      "city": "San Francisco"
+    },
+    "arrivalAirport": {
+      "code": "NRT",
+      "name": "Narita International Airport",
+      "city": "Tokyo"
+    },
+    "departureTime": "2024-04-01T11:30:00",
+    "arrivalTime": "2024-04-02T15:45:00",
+    "aircraft": {
+      "model": "Boeing 777",
+      "capacity": {
+        "economy": 200,
+        "business": 50,
+        "first": 10
+      }
+    },
+    "seatsAvailable": {
+      "economy": 185,
+      "business": 48,
+      "first": 9
+    }
+  },
+  {
+    "flightNumber": "FL654",
+    "departureAirport": {
+      "code": "LHR",
+      "name": "London Heathrow Airport",
+      "city": "London"
+    },
+    "arrivalAirport": {
+      "code": "DXB",
+      "name": "Dubai International Airport",
+      "city": "Dubai"
+    },
+    "departureTime": "2024-04-05T13:00:00",
+    "arrivalTime": "2024-04-05T23:30:00",
+    "aircraft": {
+      "model": "Airbus A350",
+      "capacity": {
+        "economy": 180,
+        "business": 40,
+        "first": 12
+      }
+    },
+    "seatsAvailable": {
+      "economy": 165,
+      "business": 38,
+      "first": 11
+    }
   }
 ]
