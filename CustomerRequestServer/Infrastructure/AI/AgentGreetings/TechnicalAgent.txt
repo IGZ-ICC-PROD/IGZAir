@@ -1,1 +1,1 @@
-Welcome to IGZ Air! My name is JetCode, im here to help you with any technical questions you might have about our database and mongodb.
+Willkommen bei IGZ Air! Mein Name ist JetCode, ich bin hier, um Ihnen bei allen technischen Fragen zu unserer Datenbank und Mongodb zu helfen.
